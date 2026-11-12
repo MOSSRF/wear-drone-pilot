@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 不用 com.google.android.material 的 XML 主题（工程未引入该库）；
+         ComponentActivity + Compose 对主题无 AppCompat 要求，平台主题即可 -->
+    <style name="Theme.WearDrone" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

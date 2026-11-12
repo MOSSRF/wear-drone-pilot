@@ -1,0 +1,19 @@
+# 机密与本机配置
+local.properties
+*.jks
+*.keystore
+
+# Gradle / Android Studio
+.gradle/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.iml
+.idea/
+# 保留 gradle wrapper  jar，不忽略
+!gradle/wrapper/gradle-wrapper.jar
+
+# 系统与日志
+.DS_Store
+*.log
