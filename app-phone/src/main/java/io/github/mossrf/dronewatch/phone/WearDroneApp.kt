@@ -44,7 +44,8 @@ class WearDroneApp : Application() {
 
             override fun onRegisterFailure(error: IDJIError) {
                 Log.e(TAG, "MSDK register failure: $error")
-                dataSource.updateSdkStatus("REGISTER_FAILED: ${error.description()}")
+                // 用 toString() 规避不同 MSDK 版本 IDJIError 方法名差异
+                dataSource.updateSdkStatus("REGISTER_FAILED: $error")
             }
 
             override fun onProductConnect(productId: Int) {
