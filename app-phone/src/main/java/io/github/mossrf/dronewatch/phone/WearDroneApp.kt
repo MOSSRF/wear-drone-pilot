@@ -2,6 +2,7 @@ package io.github.mossrf.dronewatch.phone
 
 import android.app.Application
 import android.util.Log
+import dji.open.pilot.client.manager.ServerState
 import dji.v5.common.error.IDJIError
 import dji.v5.common.register.DJISDKInitEvent
 import dji.v5.common.register.InitSettings
@@ -72,6 +73,15 @@ class WearDroneApp : Application() {
 
             override fun onDatabaseDownloadProgress(current: Long, total: Long) {
                 Log.i(TAG, "db download: $current/$total")
+            }
+
+            // MSDK 5.20.1 起 SDKManagerCallback 新增的远端服务回调（实现留空，避免误判影响注册流程）
+            override fun onRemoteServerStateUpdated(state: ServerState) {
+                Log.i(TAG, "remote server state: $state")
+            }
+
+            override fun onRemoteServerCompatibleError(error: IDJIError) {
+                Log.w(TAG, "remote server compatible error: $error")
             }
         })
     }

@@ -29,7 +29,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 # Wear OS
 wear-compose-material = { group = "androidx.wear.compose", name = "compose-material", version.ref = "wearCompose" }
 wear-compose-foundation = { group = "androidx.wear.compose", name = "compose-foundation", version.ref = "wearCompose" }
-wear-tooling = { group = "androidx.wear", name = "wear-tooling", version = "1.0.0" }
+wear-tooling = { group = "androidx.wear", name = "wear-tooling-preview", version = "1.0.0" }
 play-services-wearable = { group = "com.google.android.gms", name = "play-services-wearable", version.ref = "playServicesWear" }
 # DJI MSDK V5
 msdk-aircraft = { group = "com.dji", name = "dji-sdk-v5-aircraft", version.ref = "msdk" }

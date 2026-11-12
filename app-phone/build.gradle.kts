@@ -15,11 +15,11 @@ val djiAppKey: String = localProps.getProperty("DJI_APP_KEY") ?: ""
 
 android {
     namespace = "io.github.mossrf.dronewatch.phone"
-    // 必须与 DJI 开发者后台注册的 Package Name 完全一致（含大小写），后台不可修改
-    applicationId = "io.github.MOSSRF.dronewatch"
     compileSdk = 35
 
     defaultConfig {
+        // 必须与 DJI 开发者后台注册的 Package Name 完全一致（含大小写），后台不可修改
+        applicationId = "io.github.MOSSRF.dronewatch"
         minSdk = 24 // MSDK V5 最低要求
         targetSdk = 35
         versionCode = 1
@@ -42,6 +42,12 @@ android {
     }
     kotlin { jvmToolchain(17) }
     buildFeatures { compose = true }
+
+    packaging {
+        // Manifest 里 extractNativeLibs="true"（MSDK 需要解压 .so 后加载），
+        // 必须同时开启 legacy packaging，否则 AGP 会给出不一致告警
+        jniLibs { useLegacyPackaging = true }
+    }
 }
 
 dependencies {

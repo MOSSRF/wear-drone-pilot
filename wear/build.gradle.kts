@@ -6,11 +6,11 @@ plugins {
 
 android {
     namespace = "io.github.mossrf.dronewatch.wear"
-    // 必须与手机端 applicationId 完全一致：Wear Data Layer 只在同包名、同签名的两端间同步
-    applicationId = "io.github.MOSSRF.dronewatch"
     compileSdk = 35
 
     defaultConfig {
+        // 必须与手机端 applicationId 完全一致：Wear Data Layer 只在同包名、同签名的两端间同步
+        applicationId = "io.github.MOSSRF.dronewatch"
         // Galaxy Watch6 为 Wear OS 4（API 33），30 可覆盖更多现役手表
         minSdk = 30
         targetSdk = 35
