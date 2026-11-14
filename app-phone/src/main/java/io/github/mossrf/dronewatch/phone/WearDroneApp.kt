@@ -12,6 +12,7 @@ import dji.v5.manager.interfaces.SDKManagerCallback
 import io.github.mossrf.dronewatch.core.DroneState
 import io.github.mossrf.dronewatch.phone.data.MsdkCommandExecutor
 import io.github.mossrf.dronewatch.phone.data.MsdkDroneDataSource
+import io.github.mossrf.dronewatch.phone.data.MsdkTelemetryMonitor
 import io.github.mossrf.dronewatch.phone.wear.WearSyncManager
 
 /**
@@ -25,12 +26,14 @@ class WearDroneApp : Application() {
         private set
     lateinit var wearSync: WearSyncManager
         private set
+    private lateinit var telemetryMonitor: MsdkTelemetryMonitor
 
     override fun onCreate() {
         super.onCreate()
         dataSource = MsdkDroneDataSource()
         val commandExecutor = MsdkCommandExecutor(dataSource)
         dataSource.commandExecutor = { command -> commandExecutor.execute(command) }
+        telemetryMonitor = MsdkTelemetryMonitor(dataSource)
         wearSync = WearSyncManager(this, dataSource)
         wearSync.start()
         initMsdk()
@@ -41,6 +44,8 @@ class WearDroneApp : Application() {
             override fun onRegisterSuccess() {
                 Log.i(TAG, "MSDK register success")
                 dataSource.updateSdkStatus("REGISTERED")
+                // 注册成功后 KeyManager 可用，启动遥测监听；未连接时各 Key 暂无值，不报错
+                telemetryMonitor.start()
             }
 
             override fun onRegisterFailure(error: IDJIError) {
